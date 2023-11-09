@@ -8,13 +8,11 @@ class DisappearingNavigationRail extends StatelessWidget {
   const DisappearingNavigationRail({
     super.key,
     required this.railAnimation,
-    required this.railFabAnimation,
     required this.selectedIndex,
     this.onDestinationSelected,
   });
 
   final RailAnimation railAnimation;
-  final RailFabAnimation railFabAnimation;
   final int selectedIndex;
   final ValueChanged<int>? onDestinationSelected;
 

@@ -1,7 +1,9 @@
+import 'package:capsaicin_controller/dashboard_page.dart';
+import 'package:capsaicin_controller/resources_pages.dart';
+import 'package:capsaicin_controller/settings_page.dart';
 import 'package:flutter/material.dart';
 
 import 'animations.dart';
-import 'data.dart';
 import 'widgets/disappearing_bottom_navigation_bar.dart';
 import 'widgets/disappearing_navigation_rail.dart';
 
@@ -44,16 +46,15 @@ class _ControllerState extends State<Controller> with SingleTickerProviderStateM
       vsync: this,
   );
   late final _railAnimation = RailAnimation(parent: _controller);
-  late final _railFabAnimation = RailFabAnimation(parent: _controller);
   late final _barAnimation = BarAnimation(parent: _controller);
 
   int selectedIndex = 0;
   bool controllerInitialized = false;
 
   static const List<Widget> pages = [
-    ServerListView(),
-    Center(child: Text('Information Page')),
-    Center(child: Text('Settings Page')),
+    DashboardPage(),
+    ResourcesPage(),
+    SettingsPage(),
   ];
 
   @override
@@ -109,7 +110,6 @@ class _ControllerState extends State<Controller> with SingleTickerProviderStateM
             children: [
               DisappearingNavigationRail(
                 railAnimation: _railAnimation,
-                railFabAnimation: _railFabAnimation,
                 selectedIndex: selectedIndex,
                 onDestinationSelected: (index) {
                   setState(() {
@@ -138,77 +138,6 @@ class _ControllerState extends State<Controller> with SingleTickerProviderStateM
           ),
         );
       },
-    );
-  }
-}
-
-class ServerListView extends StatelessWidget {
-  const ServerListView({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: ListView(
-        children: [
-          const SizedBox(height: 8),
-          ...List.generate(
-            servers.length,
-                (index) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: ServerWidget(
-                  server: servers[index]
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ServerWidget extends StatefulWidget {
-  const ServerWidget({
-    super.key,
-    required this.server,
-  });
-
-  final Server server;
-
-  @override
-  State<ServerWidget> createState() => _ServerWidgetState();
-}
-
-class _ServerWidgetState extends State<ServerWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      clipBehavior: Clip.hardEdge,
-      elevation: 0,
-      color: Theme.of(context).colorScheme.primary.withOpacity(0.05),
-      child: InkWell(
-        onTap: () {},
-        child: Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(widget.server.version, style: Theme.of(context).textTheme.labelMedium),
-                const SizedBox(height: 6),
-                Text(widget.server.name, style: Theme.of(context).textTheme.titleLarge),
-                const SizedBox(height: 4),
-                Text('Disk Usage: ${widget.server.disk_usage} GB', style: Theme.of(context).textTheme.bodySmall),
-                Text('Memory Usage: ${widget.server.memory_usage} GB', style: Theme.of(context).textTheme.bodySmall),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

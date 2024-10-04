@@ -97,7 +97,7 @@ class _ControllerState extends State<Controller> with SingleTickerProviderStateM
       animation: _controller,
       builder: (context, _) {
         return Scaffold(
-          appBar: AppBar(
+          /* appBar: AppBar(
             title: Text(widget.title),
             actions: [
               IconButton(
@@ -105,7 +105,7 @@ class _ControllerState extends State<Controller> with SingleTickerProviderStateM
                 onPressed: () {},
               ),
             ],
-          ),
+          ), */
           body: Row(
             children: [
               DisappearingNavigationRail(

@@ -21,11 +21,11 @@ class ServerListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.all(24.0),
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 400,
-          // childAspectRatio: 5 / 6,
+          maxCrossAxisExtent: 250,
+          childAspectRatio: 1.2,
         ),
         itemCount: servers.length,
         itemBuilder: (context, index) {
@@ -34,6 +34,15 @@ class ServerListView extends StatelessWidget {
           );
         },
       ),
+      /* child: ListView(
+        children: [
+          const SizedBox(height: 8),
+          for (final server in servers)
+            ServerWidget(
+              server: server,
+            ),
+        ],
+      ), */
     );
   }
 }
@@ -59,8 +68,8 @@ class _ServerWidgetState extends State<ServerWidget> {
       color: Theme.of(context).colorScheme.primary.withOpacity(0.05),
       child: InkWell(
         onTap: () {},
-        child: Expanded(
-          // width: 300,
+        child: SizedBox(
+          height: 190,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -69,20 +78,26 @@ class _ServerWidgetState extends State<ServerWidget> {
                 child: Image(
                   image: widget.server.thumbnail,
                   fit: BoxFit.cover,
-                  height: 100,
+                  height: 80,
                   width: double.infinity,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(widget.server.version, style: Theme.of(context).textTheme.labelMedium),
-                    Text(widget.server.name, style: Theme.of(context).textTheme.titleLarge),
-                    Text('Disk Usage: ${widget.server.disk_usage} GB', style: Theme.of(context).textTheme.bodySmall),
-                    Text('Memory Usage: ${widget.server.memory_usage} GB', style: Theme.of(context).textTheme.bodySmall),
-                  ],
+              padding: const EdgeInsets.all(4.0),
+                child: ClipRect(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                          widget.server.name,
+                          style: Theme.of(context).textTheme.headlineSmall,
+                          overflow: TextOverflow.ellipsis,
+                      ),
+                      Text('Disk Usage: ${widget.server.disk_usage} GB', style: Theme.of(context).textTheme.bodySmall),
+                      Text('Memory Usage: ${widget.server.memory_usage} GB', style: Theme.of(context).textTheme.bodySmall),
+                      Text(widget.server.version, style: Theme.of(context).textTheme.labelMedium),
+                    ],
+                  ),
                 ),
               ),
             ],

@@ -39,4 +39,13 @@ final List<Server> servers = [
     id: 1,
     thumbnail: NetworkImage('https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/3f/Beta.png/revision/latest?cb=20191215152001'),
   ),
+  const Server(
+    name: 'Slipping Slime Hub',
+    version: 'Purpur 1.21',
+    players: '0/1000',
+    disk_usage: 42.88,
+    memory_usage: 5.01,
+    id: 2,
+    thumbnail: NetworkImage('https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/3f/Beta.png/revision/latest?cb=20191215152001'),
+  ),
 ];
